@@ -1,0 +1,3 @@
+class AtualizadorOrganizacaoController < ApplicationController
+
+end

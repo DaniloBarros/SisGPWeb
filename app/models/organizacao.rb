@@ -1,0 +1,2 @@
+class Organizacao <  Atualizavel 
+end

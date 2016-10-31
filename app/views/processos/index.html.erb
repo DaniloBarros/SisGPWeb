@@ -1,0 +1,81 @@
+<div id="page-wrapper">
+<% if notice %>
+  <br>
+  <div class="alert alert-success alert-dismissable" >
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                  <%= notice %>
+  </div>
+<% end %>
+            <div class="row">
+                <div class="col-lg-12">
+                <center>
+                
+                 
+                    <h1 class="page-header">Processos</h1>
+
+                  </center>
+                </div>
+
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+            <% if @processos.size > 0%>
+            <center>
+
+            <div><%= link_to raw("<i class='fa fa-plus' aria-hidden='true'></i>"), new_processo_path,:class=>"btn btn-success"  %></div>
+            </center>
+            <br>
+           
+
+                <% @processos.each do |processo| %>
+                    <!-- /.col-lg-4 -->
+                    <div class="col-lg-4" >
+                    <a href="">
+                        <div class="panel panel-red" >
+                            <div class="panel-heading">
+                            <center>
+                            <%= link_to processo.nome,processo, :style=>"color:white;" %>
+
+                            </center>
+
+                            </div>
+                            <div class="panel-body" style="height:100px;">
+                                <p style="max-width:100%;
+                                    word-wrap:break-word;">
+                                    <%= processo.descricao %>
+                                </p>
+                            </div>
+                            <div class="panel-footer" style="height: 40px">
+                            <center>
+                            <p style="float: left;">
+                            <%= processo.dataInicio %>
+                            </p>
+                            <p style="float: right;">
+                            <%= processo.dataFim %>
+                            </p>
+                            </center>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+              <% else %>
+
+                <div class="alert alert-success alert-info" >
+                                  <center>
+                                  Você não possui processos
+                                  </center>
+                </div>
+                <center>
+
+                <div><%= link_to raw("<i class='fa fa-plus' aria-hidden='true'></i>"), new_processo_path,:class=>"btn btn-success"  %></div>
+                </center>
+              <% end %>
+              
+              
+            </div>
+
+</div>
+                
+

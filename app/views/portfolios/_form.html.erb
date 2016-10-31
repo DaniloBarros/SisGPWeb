@@ -1,0 +1,54 @@
+<%=  bootstrap_form_for(:portfolio) do |f| %>
+  <% if @portfolio.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@portfolio.errors.count, "error") %>
+      prohibited this portfolio from being saved:</h2>
+
+    <ul>
+      <% @portfolio.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="row" style="margin-left: 10%">
+  <div class="col-lg-10">
+
+          <%= f.text_field :nome %>
+          <%= f.text_area :descricao, length:'120' %>
+          <%= f.text_field :dataInicio, class: 'datepicker' %>
+          <%= f.text_field :dataFim, class: 'datepicker' %>
+          
+          <% if @portfolio.new_record? %>  
+          <% #do nothing %>
+          <% else %>    
+            <%= f.label :adicionar_dono_email %><br>                  
+            <%= text_field_tag(:dono) %> 
+            <br>
+            <br>
+          <% end %>
+
+          <%= f.label :adicionar_projetos %><br>
+              <select multiple="multiple" name="projetos_added[]" id="projetos_added">
+              <option value="" disabled selected>Selecione os projetos</option>
+              <% if @projetos %>
+                <% @projetos.each do |projeto| %>
+                  <option value="<%=projeto.id%>"> <%=projeto.nome%> </option>
+                <% end %>
+              <% end %>
+          </select>
+
+        <br><br>
+        <center>
+        <% if @portfolio.new_record? %>  
+          <%= f.submit value:'Criar', class: 'btn btn-success btn-lg'%>
+      <% else %>
+          <%= f.submit value:'Editar', class: 'btn btn-success btn-lg' %>
+      <% end %>
+      </center>
+        
+      </div>
+    </div>
+  </div>
+  <% end %>
+

@@ -1,0 +1,110 @@
+  <nav class="white" role="navigation">
+
+    <div class="nav-wrapper container">
+
+    <% if logged_in? %>
+    <% else %>
+      <%= link_to "SisGP" , root_path, :class => "brand-logo" %>
+    <%end%>
+
+      <ul class="right hide-on-med-and-down">
+      <% if logged_in? %>
+      <% else %>
+         <li><%= link_to "Log in", sign_in_path %></li>
+      <%end%>
+
+      </ul>
+</nav>
+
+<% if logged_in? %>  
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/dashboard"><strong><p style="color: #337ab7; float: left;" >SisGP</p></a></strong>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">          
+                
+                <li >
+                  
+                        <p style="color: orange;"><%= "Bem vindo "%> <strong style="color:  green;"> <%= current_user.nome%></p></strong>
+                    
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="/usuarios/<%=current_user.id%>"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configurações</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="/sign_out"><i class="fa fa-sign-out fa-fw"></i>Sair</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                         <li><a href="/portfolios"><i class="fa fa-briefcase" aria-hidden="true"></i> Portfolios</a></li>
+                          <li><a href="/projetos"><i class="fa fa-folder" aria-hidden="true"></i> Projetos</a></li>
+                          <li><a href="/processos"><i class="fa fa-line-chart" aria-hidden="true"></i> Processos</a></li>
+                      
+                        
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+<!--   
+     <ul id="slide-out" class="side-nav fixed" style="visibility: hidden;">
+     <div style="float: right;">
+      <li><a href="#!"><i class="small mdi-navigation-menu"></i></a></li>
+     </div>
+     <center>
+     <br><br>
+     <li><img style="margin-right: -40%; margin-bottom: -10%; " src="https://pixabay.com/static/uploads/photo/2013/07/12/18/38/gears-153639_960_720.png" alt="" class="responsive-img valign profile-image-login" width="20%"></li>
+          
+      <li><h5 style="color:gray;"> SisGP </h5></li>
+      <li><hr></li>
+        
+      <li><a href="/portfolios">Portfolios</a></li>
+      <li><a href="/projetos">Projetos</a></li>
+      <li><a href="/processos">Processos</a></li>
+</center>
+    </ul>
+     
+    <a href="#" data-activates="slide-out" class="button-collapse" style="float: left;"><i class="medium mdi-navigation-menu" onclick="openMenu()"></i></a>
+    -->
+<%end%>
+<script type="text/javascript">
+
+function openMenu(){
+
+  document.getElementById('slide-out').style.visibility = "visible";
+
+}
+</script>
+    

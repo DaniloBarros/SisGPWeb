@@ -1,0 +1,45 @@
+  <%=  bootstrap_form_for(:atividade) do |f| %>
+  <% if @atividade.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@processo.errors.count, "error") %>
+      prohibited this processo from being saved:</h2>
+
+    <ul>
+      <% @processo.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="row" style="margin-left: 10%">
+  <div class="col-lg-10">
+
+          <%= f.text_field :nome %>
+          <%= f.text_area :descricao, length:'120' %>
+          <%= f.text_field :dataInicio, class: 'datepicker' %>
+          <%= f.text_field :dataFim, class: 'datepicker' %>                
+          <%= f.label :resposavel_email %><br>                  
+          <%= text_field_tag(:responsavel) %> 
+          <br>
+          <br>
+
+        
+        <% if @atividade.new_record? %>  
+        <center>
+          <%= f.submit value:'Criar', class: 'btn btn-success btn-lg'%>
+          </center>
+        <% else %>
+          <%= f.check_box :finalizada %>
+          <br><br>
+          <center>
+          <%= f.submit value:'Editar', class: 'btn btn-success btn-lg'%>
+          </center>
+        <% end %>
+      </div>
+      
+      
+        
+      </div>
+    </div>
+  </div>
+  <% end %>

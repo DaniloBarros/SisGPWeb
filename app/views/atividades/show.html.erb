@@ -1,0 +1,120 @@
+<div id="page-wrapper">
+    <% if notice %>
+  <br>
+  <div class="alert alert-success alert-dismissable" >
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                  <%= notice %>
+  </div>
+<% end %>
+    <br>
+    <div class="row">
+                <div class="col-lg-12">
+                <div style="float: right; margin-right: 1%; margin-top: 1%">
+                    <% if @atividade.responsaveis.include?(current_user) || @atividade.processo.donos.include?(current_user) %> 
+                    <%= link_to raw("<i class='fa fa-pencil' aria-hidden='true'></i>"), atividade_editar_path(@atividade),:class=>"btn btn-info btn-circle btn-lg"  %>
+
+                    <%= link_to raw("<i class='fa fa-times'></i>"), @atividade, method: :delete, data: { confirm: "Deseja mesmo excluir o atividade '#{@atividade.nome}' ?"}, :class=>"btn btn-danger btn-circle btn-lg"  %>
+                    <% end %>
+                 </div>
+                <div class="jumbotron">
+                    
+                   
+                   <center>
+                        <h2><%= @atividade.nome %></h2>
+                        <p>
+                        <%= @atividade.descricao %>
+                        </p>
+                        <br><br>
+                        <p><strong>Data inicial:</strong>
+                        <%= @atividade.dataInicio %>
+                        
+                        <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data final:</strong>
+                         <%= @atividade.dataFim %></p>
+                         </center>
+                         <p style="margin-left: 24.8%;"><strong>Responsável:</strong>
+                         <% @atividade.responsaveis.each.with_index do |responsavel, index| %>
+                            <% if (index > 0) %>
+                            , 
+                            <% end %>
+                            <%= responsavel.nome %>
+                         <% end %>
+                         </p>
+
+                         <p style="margin-left: 24.8%;"><strong>Status:</strong>
+                         <% if @atividade.finalizada %>
+                            finalizada
+                        <% else %>
+                            em andamento
+                        <% end %>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+      </div>
+
+
+      <div class="row">
+      <div class="col-lg-12">
+            <div class="panel-group" id="accordion">
+            <% if @atividade.comentarios.size > 0 %>
+                <div class="panel panel-default">
+                        <div class="panel-heading">
+                        <center>
+                            <strong>Comentários</strong>
+                        </center>
+                        </div>
+                        <!-- .panel-heading -->
+                        <div class="panel-body">
+                <% @atividade.comentarios.each do |comentario| %>
+
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%=comentario.id%>">
+                                                <%if comentario.usuario%>
+                                                <%= comentario.usuario.nome %>
+                                                <% else %>
+                                                Anônimo
+                                                <% end %>
+                                                : <%=comentario.assunto%></a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse<%=comentario.id%>" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <%= comentario.conteudo %>
+                                            </div>
+                                        </div>
+                                    </div>
+                <% end %>
+                </div>
+                </div>
+            <% else %>
+                <div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <center>
+                        Esta atividade não possui comentários.
+                    </center>
+                </div>
+            <% end %>
+            </div>
+      </div>
+      </div>
+
+      <div class="row">
+      <div class="col-lg-12">
+            <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <center>
+                            <strong>Comentar</strong>
+                            </center>
+                        </div>
+                        <!-- .panel-heading -->
+                        <div class="panel-body">
+                            <%= render 'form_comentario' %>
+                            </div>
+                            </div>
+      </div>
+      </div>
+
+ 
+    </div>
+</div>

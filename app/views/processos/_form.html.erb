@@ -1,0 +1,42 @@
+<%=  bootstrap_form_for(:processo) do |f| %>
+  <% if @processo.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@processo.errors.count, "error") %>
+      prohibited this processo from being saved:</h2>
+
+    <ul>
+      <% @processo.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="row" style="margin-left: 10%">
+  <div class="col-lg-10">
+
+          <%= f.text_field :nome %>
+          <%= f.text_area :descricao, length:'120' %>
+          <%= f.text_field :dataInicio, class: 'datepicker' %>
+          <%= f.text_field :dataFim, class: 'datepicker' %>
+          
+          <% if @processo.new_record? %>  
+          <% #do nothing %>
+          <% else %>    
+            <%= f.label :adicionar_dono_email %><br>                  
+            <%= text_field_tag(:dono) %> 
+          <% end %>
+
+        <br><br>
+        <center>
+        <% if @processo.new_record? %>  
+          <%= f.submit value:'Criar', class: 'btn btn-success btn-lg'%>
+      <% else %>
+          <%= f.submit value:'Editar', class: 'btn btn-success btn-lg' %>
+      <% end %>
+      </center>
+        
+      </div>
+    </div>
+  </div>
+  <% end %>
+
